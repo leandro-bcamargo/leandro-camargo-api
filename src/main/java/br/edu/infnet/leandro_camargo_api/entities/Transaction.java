@@ -4,15 +4,18 @@ import java.time.LocalDateTime;
 import org.springframework.cglib.core.Local;
 
 public abstract class Transaction {
-  private Long id;
+  private static Long counter = 0L;
+  private final Long id;
   private double amount;
   private String description;
   private LocalDateTime timestamp;
 
-  public Transaction(double amount, String description, LocalDateTime timestamp) {
+  public Transaction(double amount, String description) {
     this.amount = amount;
     this.description = description;
-    this.timestamp = timestamp;
+    this.timestamp = LocalDateTime.now();
+    counter++;
+    this.id = counter;
   }
 
   public Long getId() {
