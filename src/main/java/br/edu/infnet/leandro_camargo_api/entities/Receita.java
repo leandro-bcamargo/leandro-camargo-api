@@ -1,17 +1,19 @@
 package br.edu.infnet.leandro_camargo_api.entities;
 
 public class Receita extends Transacao {
-  private String fonte;
 
-  public Receita(double amount, String description) {
-    super(amount, description);
+  public Receita(double quantia, String fonte) {
+    super(quantia, fonte);
+    this.validaQuantiaReceita(quantia);
+    this.validaFonteReceita(fonte);
   }
 
-  public String getFonte() {
-    return fonte;
+  public void validaQuantiaReceita(double quantia) {
+    if (quantia <= 0) throw new IllegalArgumentException("Favor inserir uma quantia positiva");
   }
 
-  public void setFonte(String fonte) {
-    this.fonte = fonte;
+  public void validaFonteReceita(String fonte) {
+    if (fonte.isEmpty()) throw new IllegalArgumentException("Favor inserir uma fonte para a "
+        + "receita.");
   }
 }
