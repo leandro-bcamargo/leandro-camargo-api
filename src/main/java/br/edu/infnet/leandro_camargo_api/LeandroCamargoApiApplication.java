@@ -19,7 +19,7 @@ public class LeandroCamargoApiApplication {
 		ConfigurableApplicationContext context =
 				SpringApplication.run(LeandroCamargoApiApplication.class, args); // armazenando o
 		// contexto da aplicação para poder encerrá-la em uma das opções do menu
-		GerenciadorFinancas gf = new GerenciadorFinancas();
+		GerenciadorFinancas gerenciador = new GerenciadorFinancas();
 		try (Scanner kb = new Scanner(System.in)) {
 			while (true) {
 				// TODO: Imprimir última linha do menu só em alguns casos
@@ -27,19 +27,13 @@ public class LeandroCamargoApiApplication {
 				int opcao = ValidadorInput.validaInputInt(kb, "");
 				switch(opcao) {
 					case 1:
-						try {
-							double quantiaDespesa = ValidadorInput.validaInputDouble(kb,"Digite a quantia da "
-									+ "despesa:");
-							ValidadorDespesa.validaQuantiaDespesa(quantiaDespesa);
-							System.out.println("Digite a destinacao da despesa:");
-							String destinacao = kb.nextLine();
-							ValidadorDespesa.validaDestinacao(destinacao);
-							Despesa despesa = new Despesa(quantiaDespesa, destinacao);
-							gf.adicionarDespesa(despesa);
-							System.out.println("Despesa adicionada com sucesso!");
-						} catch(Exception e) {
-							System.out.println("## ERRO AO TENTAR INSERIR DESPESA: " + e.getMessage() + " ##");
-						}
+            double quantiaDespesa = ValidadorDespesa.validaQuantiaDespesa(kb, "Digite a quantia da "
+                + "despesa:");
+            String destinacao = ValidadorDespesa.validaDestinacao(kb, "Digite a destinacao da "
+              + "despesa:");
+            Despesa despesa = new Despesa(quantiaDespesa, destinacao);
+            gerenciador.adicionarDespesa(despesa);
+            System.out.println("Despesa adicionada com sucesso!");
 						break;
 					case 2:
 						try {
@@ -50,14 +44,14 @@ public class LeandroCamargoApiApplication {
 							String fonte = kb.nextLine();
 							ValidadorReceita.validaFonteReceita(fonte);
 							Receita receita = new Receita(quantiaReceita, fonte);
-							gf.adicionarReceita(receita);
+							gerenciador.adicionarReceita(receita);
 							System.out.println("Receita adicionada com sucesso!");
 						} catch(Exception e) {
 							System.out.println("## ERRO AO TENTAR INSERIR RECEITA: " + e.getMessage() + " ##");
 						}
 						break;
 					case 3:
-						double saldo = gf.getSaldo();
+						double saldo = gerenciador.getSaldo();
 						System.out.printf("Seu saldo é R$%.2f.%n", saldo);
 						break;
 					case 0:

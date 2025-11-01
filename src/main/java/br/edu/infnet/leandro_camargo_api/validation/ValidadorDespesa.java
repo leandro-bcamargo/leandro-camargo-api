@@ -1,13 +1,42 @@
 package br.edu.infnet.leandro_camargo_api.validation;
 
+import br.edu.infnet.leandro_camargo_api.exceptions.NaoDoubleException;
+import br.edu.infnet.leandro_camargo_api.exceptions.NaoVazioException;
+import br.edu.infnet.leandro_camargo_api.exceptions.ValorNegativoException;
+import java.util.Scanner;
+
 public class ValidadorDespesa {
-  public static void validaQuantiaDespesa(double quantia) {
-    if (quantia <= 0) throw new IllegalArgumentException("## QUANTIA INVÁLIDA - FAVOR INSERIR UMA"
-        + " QUANTIA POSITIVA. ##");
+  public static double validaQuantiaDespesa(Scanner kb, String message) {
+    while (true) {
+      System.out.println(message);
+      try {
+        double quantiaDespesa = ValidadorInput.validaInputDouble(kb,message);
+        if (quantiaDespesa <= 0) {
+          throw new ValorNegativoException(
+              "## VALOR INVÁLIDO - FAVOR INSERIR UM VALOR POSITIVO ##");
+        } else {
+          return quantiaDespesa;
+        }
+      } catch (ValorNegativoException | NaoDoubleException e) {
+        System.out.println(e.getMessage());
+      }
+    }
   }
 
-  public static void validaDestinacao(String destinacao) {
-    if (destinacao.isEmpty()) throw new IllegalArgumentException("## DESTINAÇÃO INVÁLIDA - "
-        + "FAVOR INSERIR UMA DESTINAÇÃO PARA A DESPESA. ##");
+  public static String validaDestinacao(Scanner kb, String message) {
+    while (true) {
+      System.out.println(message);
+      try {
+        String destinacao = kb.nextLine();
+        if (destinacao.isEmpty()) {
+          throw new NaoVazioException("## DESTINAÇÃO INVÁLIDA - "
+              + "FAVOR INSERIR UMA DESTINAÇÃO PARA A DESPESA. ##");
+        } else {
+          return destinacao;
+        }
+      } catch(NaoVazioException e) {
+        System.out.println(e.getMessage());
+      }
+    }
   }
 }
