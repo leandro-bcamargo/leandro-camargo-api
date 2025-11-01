@@ -33,23 +33,16 @@ public class LeandroCamargoApiApplication {
               + "despesa:");
             Despesa despesa = new Despesa(quantiaDespesa, destinacao);
             gerenciador.adicionarDespesa(despesa);
-            System.out.println("Despesa adicionada com sucesso!");
+            System.out.println("## DESPESA ADICIONADA COM SUCESSO! ##");
 						break;
-					case 2:
-						try {
-							double quantiaReceita = ValidadorInput.validaInputDouble(kb, "Digite a quantia da "
-									+ "receita:");
-							ValidadorReceita.validaQuantiaReceita(quantiaReceita);
-							System.out.println("Digite a fonte da receita:");
-							String fonte = kb.nextLine();
-							ValidadorReceita.validaFonteReceita(fonte);
-							Receita receita = new Receita(quantiaReceita, fonte);
-							gerenciador.adicionarReceita(receita);
-							System.out.println("Receita adicionada com sucesso!");
-						} catch(Exception e) {
-							System.out.println("## ERRO AO TENTAR INSERIR RECEITA: " + e.getMessage() + " ##");
-						}
-						break;
+          case 2:
+            double quantiaReceita = ValidadorReceita.validaQuantiaReceita(kb, "Digite a quantia da "
+                + "receita:");;
+            String fonte = ValidadorReceita.validaFonteReceita(kb, "Digite a fonte da receita:");
+            Receita receita = new Receita(quantiaReceita, fonte);
+            gerenciador.adicionarReceita(receita);
+            System.out.println("## RECEITA ADICIONADA COM SUCESSO! ##");
+          break;
 					case 3:
 						double saldo = gerenciador.getSaldo();
 						System.out.printf("Seu saldo é R$%.2f.%n", saldo);

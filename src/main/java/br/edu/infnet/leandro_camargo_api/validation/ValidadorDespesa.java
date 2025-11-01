@@ -1,7 +1,7 @@
 package br.edu.infnet.leandro_camargo_api.validation;
 
 import br.edu.infnet.leandro_camargo_api.exceptions.NaoDoubleException;
-import br.edu.infnet.leandro_camargo_api.exceptions.NaoVazioException;
+import br.edu.infnet.leandro_camargo_api.exceptions.StringVaziaException;
 import br.edu.infnet.leandro_camargo_api.exceptions.ValorNegativoException;
 import java.util.Scanner;
 
@@ -29,12 +29,12 @@ public class ValidadorDespesa {
       try {
         String destinacao = kb.nextLine();
         if (destinacao.isEmpty()) {
-          throw new NaoVazioException("## DESTINAÇÃO INVÁLIDA - "
+          throw new StringVaziaException("## DESTINAÇÃO INVÁLIDA - "
               + "FAVOR INSERIR UMA DESTINAÇÃO PARA A DESPESA. ##");
         } else {
           return destinacao;
         }
-      } catch(NaoVazioException e) {
+      } catch(StringVaziaException e) {
         System.out.println(e.getMessage());
       }
     }
