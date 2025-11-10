@@ -47,6 +47,9 @@ public class LeandroCamargoApiApplication {
 						double saldo = gerenciador.getSaldo();
 						System.out.printf("Seu saldo é R$%.2f.%n", saldo);
 						break;
+					case 4:
+						gerenciador.imprimeExtrato();
+						break;
 					case 0:
 						System.out.println("Encerrando...");
 						context.close(); // encerra aplicação

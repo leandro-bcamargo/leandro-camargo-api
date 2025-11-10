@@ -3,6 +3,7 @@ package br.edu.infnet.leandro_camargo_api.services;
 import br.edu.infnet.leandro_camargo_api.entities.Despesa;
 import br.edu.infnet.leandro_camargo_api.entities.Receita;
 import br.edu.infnet.leandro_camargo_api.entities.Transacao;
+import br.edu.infnet.leandro_camargo_api.ui.MenuPrincipal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,5 +31,12 @@ public class GerenciadorFinancas {
         .reduce(0.0, Double::sum);
 
     return receitas - despesas;
+  }
+
+  public void imprimeExtrato() {
+    this.transacoes.forEach(tr -> {
+      MenuPrincipal.imprimeLinha();
+      System.out.println(tr.gerarEntradaExtrato());
+    });
   }
 }
