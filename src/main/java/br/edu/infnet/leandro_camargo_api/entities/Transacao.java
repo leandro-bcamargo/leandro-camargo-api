@@ -1,7 +1,6 @@
 package br.edu.infnet.leandro_camargo_api.entities;
 
 import br.edu.infnet.leandro_camargo_api.ui.Formatador;
-import br.edu.infnet.leandro_camargo_api.ui.MenuPrincipal;
 import java.time.LocalDateTime;
 
 public abstract class Transacao {

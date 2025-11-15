@@ -2,7 +2,6 @@ package br.edu.infnet.leandro_camargo_api.validation;
 
 import br.edu.infnet.leandro_camargo_api.exceptions.NaoDoubleException;
 import br.edu.infnet.leandro_camargo_api.exceptions.NaoInteiroException;
-import br.edu.infnet.leandro_camargo_api.ui.MenuPrincipal;
 import java.util.Scanner;
 
 public class ValidadorInput {

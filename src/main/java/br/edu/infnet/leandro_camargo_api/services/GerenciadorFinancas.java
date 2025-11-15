@@ -3,7 +3,7 @@ package br.edu.infnet.leandro_camargo_api.services;
 import br.edu.infnet.leandro_camargo_api.entities.Despesa;
 import br.edu.infnet.leandro_camargo_api.entities.Receita;
 import br.edu.infnet.leandro_camargo_api.entities.Transacao;
-import br.edu.infnet.leandro_camargo_api.ui.MenuPrincipal;
+import br.edu.infnet.leandro_camargo_api.ui.MenuDisplay;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,10 +33,46 @@ public class GerenciadorFinancas {
     return receitas - despesas;
   }
 
-  public void imprimeExtrato() {
+  public void imprimirExtrato() {
+    if (transacoes.isEmpty()) {
+      MenuDisplay.imprimeLinha();
+      System.out.println("Não há transações registradas.");
+      return;
+    }
     this.transacoes.forEach(tr -> {
-      MenuPrincipal.imprimeLinha();
+      MenuDisplay.imprimeLinha();
       System.out.println(tr.gerarEntradaExtrato());
+    });
+  }
+
+  public void imprimirReceitas() {
+    List<Transacao> receitas = this.transacoes.stream().filter(tr -> tr instanceof Receita).toList();
+    if (receitas.isEmpty()) {
+      MenuDisplay.imprimeLinha();
+      System.out.println("Não há receitas registradas.");
+      return;
+    }
+    receitas.forEach(tr -> {
+      if (tr instanceof Receita) {
+        MenuDisplay.imprimeLinha();
+        System.out.println(tr.gerarEntradaExtrato());
+      }
+    });
+  }
+
+  public void imprimirDespesas() {
+    List<Transacao> despesas =
+        this.transacoes.stream().filter(tr -> tr instanceof  Despesa).toList();
+    if (despesas.isEmpty()) {
+      MenuDisplay.imprimeLinha();
+      System.out.println("Não há despesas registradas.");
+      return;
+    }
+    this.transacoes.forEach(tr -> {
+      if (tr instanceof Despesa) {
+        MenuDisplay.imprimeLinha();
+        System.out.println(tr.gerarEntradaExtrato());
+      }
     });
   }
 }
