@@ -3,7 +3,7 @@ package br.edu.infnet.leandro_camargo_api;
 import br.edu.infnet.leandro_camargo_api.entities.Despesa;
 import br.edu.infnet.leandro_camargo_api.entities.Receita;
 import br.edu.infnet.leandro_camargo_api.services.GerenciadorFinancas;
-import br.edu.infnet.leandro_camargo_api.ui.MenuPrincipal;
+import br.edu.infnet.leandro_camargo_api.ui.MenuDisplay;
 import br.edu.infnet.leandro_camargo_api.validation.ValidadorDespesa;
 import br.edu.infnet.leandro_camargo_api.validation.ValidadorInput;
 import br.edu.infnet.leandro_camargo_api.validation.ValidadorReceita;
@@ -23,7 +23,7 @@ public class LeandroCamargoApiApplication {
 		try (Scanner kb = new Scanner(System.in)) {
 			while (true) {
 				// TODO: Imprimir última linha do menu só em alguns casos
-				MenuPrincipal.imprimeMenuPrincipal();
+				MenuDisplay.imprimeMenuPrincipal();
 				int opcao = ValidadorInput.validaInputInt(kb, "");
 				switch(opcao) {
 					case 1:
@@ -48,7 +48,13 @@ public class LeandroCamargoApiApplication {
 						System.out.printf("Seu saldo é R$%.2f.%n", saldo);
 						break;
 					case 4:
-						gerenciador.imprimeExtrato();
+						gerenciador.imprimirReceitas();
+						break;
+					case 5:
+						gerenciador.imprimirDespesas();
+						break;
+					case 6:
+						gerenciador.imprimirExtrato();
 						break;
 					case 0:
 						System.out.println("Encerrando...");
