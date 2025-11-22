@@ -11,6 +11,7 @@ public class MenuDisplay {
     System.out.println("4 - Consultar Receitas");
     System.out.println("5 - Consultar Despesas");
     System.out.println("6 - Consultar Extrato Completo");
+    System.out.println("7 - Remover Transação");
     System.out.println("0 - Sair");
     System.out.println("Digite a opção desejada:");
   }

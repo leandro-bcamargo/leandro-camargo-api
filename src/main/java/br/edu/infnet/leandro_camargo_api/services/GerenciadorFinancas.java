@@ -3,6 +3,7 @@ package br.edu.infnet.leandro_camargo_api.services;
 import br.edu.infnet.leandro_camargo_api.entities.Despesa;
 import br.edu.infnet.leandro_camargo_api.entities.Receita;
 import br.edu.infnet.leandro_camargo_api.entities.Transacao;
+import br.edu.infnet.leandro_camargo_api.exceptions.TransacaoNaoEncontradaException;
 import br.edu.infnet.leandro_camargo_api.ui.MenuDisplay;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +11,10 @@ import java.util.List;
 public class GerenciadorFinancas {
 
   private List<Transacao> transacoes = new ArrayList<>();
+
+  public List<Transacao> getTransacoes() {
+    return transacoes;
+  }
 
   public void adicionarReceita(Receita receita) {
     this.transacoes.add(receita);
@@ -74,5 +79,9 @@ public class GerenciadorFinancas {
         System.out.println(tr.gerarEntradaExtrato());
       }
     });
+  }
+
+  public void removerTransacao(Transacao transacao) throws TransacaoNaoEncontradaException {
+    this.transacoes.remove(transacao);
   }
 }

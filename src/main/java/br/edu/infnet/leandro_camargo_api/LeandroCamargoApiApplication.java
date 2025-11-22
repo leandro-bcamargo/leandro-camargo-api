@@ -2,11 +2,13 @@ package br.edu.infnet.leandro_camargo_api;
 
 import br.edu.infnet.leandro_camargo_api.entities.Despesa;
 import br.edu.infnet.leandro_camargo_api.entities.Receita;
+import br.edu.infnet.leandro_camargo_api.entities.Transacao;
 import br.edu.infnet.leandro_camargo_api.services.GerenciadorFinancas;
 import br.edu.infnet.leandro_camargo_api.ui.MenuDisplay;
 import br.edu.infnet.leandro_camargo_api.validation.ValidadorDespesa;
 import br.edu.infnet.leandro_camargo_api.validation.ValidadorInput;
 import br.edu.infnet.leandro_camargo_api.validation.ValidadorReceita;
+import br.edu.infnet.leandro_camargo_api.validation.ValidadorTransacao;
 import java.util.Scanner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -24,7 +26,7 @@ public class LeandroCamargoApiApplication {
 			while (true) {
 				// TODO: Imprimir última linha do menu só em alguns casos
 				MenuDisplay.imprimeMenuPrincipal();
-				int opcao = ValidadorInput.validaInputInt(kb, "");
+				int opcao = ValidadorInput.validaInputInt(kb);
 				switch(opcao) {
 					case 1:
             double quantiaDespesa = ValidadorDespesa.validaQuantiaDespesa(kb, "Digite a quantia da "
@@ -55,6 +57,12 @@ public class LeandroCamargoApiApplication {
 						break;
 					case 6:
 						gerenciador.imprimirExtrato();
+						break;
+					case 7:
+						Transacao transacao = ValidadorTransacao.validaTransacaoEncontrada(kb, gerenciador,
+								"Digite o ID da transação a ser removida:");
+						gerenciador.removerTransacao(transacao);
+						System.out.println("Transação removida com sucesso!");
 						break;
 					case 0:
 						System.out.println("Encerrando...");
