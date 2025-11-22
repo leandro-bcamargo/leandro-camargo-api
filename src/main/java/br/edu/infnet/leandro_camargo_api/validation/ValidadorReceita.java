@@ -10,7 +10,7 @@ public class ValidadorReceita {
     while (true) {
       System.out.println(mensagem);
       try {
-        double quantiaReceita = ValidadorInput.validaInputDouble(kb, mensagem);
+        double quantiaReceita = ValidadorInput.validaInputDouble(kb);
         if (quantiaReceita <= 0) {
           throw new ValorNegativoException("## QUANTIA INVALIDA - FAVOR INSERIR UMA"
               + " QUANTIA POSITIVA. ##");

@@ -10,7 +10,7 @@ public class ValidadorDespesa {
     while (true) {
       System.out.println(message);
       try {
-        double quantiaDespesa = ValidadorInput.validaInputDouble(kb,message);
+        double quantiaDespesa = ValidadorInput.validaInputDouble(kb);
         if (quantiaDespesa <= 0) {
           throw new ValorNegativoException(
               "## VALOR INVÁLIDO - FAVOR INSERIR UM VALOR POSITIVO ##");
